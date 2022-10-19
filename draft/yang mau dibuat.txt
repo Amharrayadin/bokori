@@ -1,0 +1,26 @@
+List
+
+yang belum : 
+menu pesan tiket + daftar pesanan 
+profile user
+Dashboard admin
+
+yang sudah :
+crud Tabel penyebrangan (kodingan konfirnya belum)
+crud tabel papalimbang
+crud tabel tiket
+crud tabel stok tiket
+crud tabel Kapal
+Login (belum atur session)
+register
+Menu kiri (tinggal sesuaikan sama page yg ada)
+profile Admin 
+Navbar
+
+daftar menu admin :
+dashboard
+penyeberangan
+tiket [daftar, stok]
+kapal
+papalimbang
+akun setting
