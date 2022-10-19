@@ -88,7 +88,7 @@ include 'connect.php';
                 <div class="mb-3">
                   <label for="nik" class="form-label">NIK</label>
                   <input
-                    type="text"
+                    type="number"
                     class="form-control"
                     id="nik"
                     name="nik"
@@ -123,7 +123,7 @@ include 'connect.php';
                 <div class="mb-3">
                   <label for="nohp" class="form-label">No Telepon</label>
                   <input
-                    type="text"
+                    type="number"
                     class="form-control"
                     id="nohp"
                     name="nohp"
