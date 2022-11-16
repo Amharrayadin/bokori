@@ -1,19 +1,18 @@
 <?php
-    session_start();
-  
-    //cek apakah user sudah login
-    if(!isset($_SESSION['username'])){
-      header("Location: login.php?pesan=Silahkan Login Terlebih Dahulu&alert=alert-warning");
-    }
-    
-    //cek level user
-    if($_SESSION['level']!="Public")
-    {
-      header("Location: index.php");
-    }
+session_start();
 
-    ob_start();
-    include 'connect.php';
+//cek apakah user sudah login
+if (!isset($_SESSION['username'])) {
+  header('Location: login.php?pesan=Silahkan Login Terlebih Dahulu&alert=alert-warning');
+}
+
+//cek level user
+if ($_SESSION['level'] != 'Public') {
+  header('Location: index.php');
+}
+
+ob_start();
+include 'connect.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -108,10 +107,10 @@ https://templatemo.com/tm-580-woox-travel
                         <li><a href="tentang.php">Tentang</a></li>
                         <li><a href="pesan-tiket.php" class="active">Pesan Tiket</a></li>
                         <?php
-                        if(!isset($_SESSION['username'])){
+                        if (!isset($_SESSION['username'])) {
                           echo "<li><a href='login.php'>Masuk/Daftar</a></li>";
                         }
-                        if(isset($_SESSION['username'])){
+                        if (isset($_SESSION['username'])) {
                           echo "
                           <li><a href='pesanan.php'>Pesanan</a></li>
                           <li><a href='profil.php'>Profil</a></li>
@@ -148,12 +147,11 @@ https://templatemo.com/tm-580-woox-travel
                 <h4> <em>Tiket Penyebrangan</em> Bokori Island </h4>
               </div>
               
-              <?php
-                if($_GET['act']=="cari"){
-                  $tgl_stok = $_GET['tgl_stok'];
-                  $jumlah_pesan = $_GET['jumlah_pesan'];
-                  $no=1;
-                  $sqlsearch = "SELECT tb_stok_tiket.id_stok, 
+              <?php if ($_GET['act'] == 'cari') {
+                $tgl_stok = $_GET['tgl_stok'];
+                $jumlah_pesan = $_GET['jumlah_pesan'];
+                $no = 1;
+                $sqlsearch = "SELECT tb_stok_tiket.id_stok, 
                                       tb_stok_tiket.tgl_stok, 
                                       tb_stok_tiket.jam_stok, 
                                       tb_stok_tiket.jumlah_stok, 
@@ -163,16 +161,16 @@ https://templatemo.com/tm-580-woox-travel
                                       tb_kapal.id_kapal, 
                                       tb_kapal.nama_kapal 
                                 FROM tb_stok_tiket INNER JOIN (tb_tiket INNER JOIN tb_kapal ON tb_tiket.id_kapal = tb_kapal.id_kapal) ON tb_stok_tiket.id_tiket = tb_tiket.id_tiket WHERE tgl_stok = '$tgl_stok' AND jumlah_stok>='$jumlah_pesan'";
-                  $querysearch = mysqli_query($connect,$sqlsearch);
-                  if(mysqli_num_rows($querysearch) == 0){
-                    echo "<tbody class='table-border-bottom-0'>
+                $querysearch = mysqli_query($connect, $sqlsearch);
+                if (mysqli_num_rows($querysearch) == 0) {
+                  echo "<tbody class='table-border-bottom-0'>
                     <center>
                     <div class='alert alert-warning alert-dismissible' role='alert'>
                     Tidak Ada Tiket yang Tersedia
                     </div>
                     </center>
                     </tbody>";
-                  }else{
+                } else {
                   echo "
                   <div class='table-responsive text-nowrap'>
                     <table class='table'>
@@ -188,8 +186,7 @@ https://templatemo.com/tm-580-woox-travel
                       </thead>
                   ";
 
-                  while ($data = mysqli_fetch_row($querysearch)){
-              ?>
+                  while ($data = mysqli_fetch_row($querysearch)) { ?>
                       <tbody class="table-border-bottom-0">
                         <tr>
                           <td scope="row"><?php echo $no; ?></td>
@@ -199,28 +196,25 @@ https://templatemo.com/tm-580-woox-travel
                           <td><?php echo "$data[6]"; ?></td>
                           <td>
                             <?php
-                              $id_stok = $data[0];
-                              $jumlah_penyeberangan = $jumlah_pesan;
-                              $nik = $_SESSION['nik'];
-                              $id_tiket = $data[4];
-                              $harga = $data[6];
-                              $total_harga = $harga*$jumlah_penyeberangan;
-                              $jumlah_stok=$data[3];
-                              $sisa_stok = $jumlah_stok - $jumlah_penyeberangan;
+                            $id_stok = $data[0];
+                            $jumlah_penyeberangan = $jumlah_pesan;
+                            $nik = $_SESSION['nik'];
+                            $id_tiket = $data[4];
+                            $harga = $data[6];
+                            $total_harga = $harga * $jumlah_penyeberangan;
+                            $jumlah_stok = $data[3];
+                            $sisa_stok = $jumlah_stok - $jumlah_penyeberangan;
                             ?>
-                              <a class="btn p-2" href="act-pesan-tiket.php?<?php echo "act=beli&id_stok=$id_stok&nik=$nik&jumlah_penyeberangan=$jumlah_penyeberangan&total_harga=$total_harga&sisa_stok=$sisa_stok&jumlah_stok=$jumlah_stok";?>">Beli</a>
+                              <a class="btn p-2" href="act-pesan-tiket.php?<?php echo "act=beli&id_stok=$id_stok&nik=$nik&harga=$harga&jumlah_penyeberangan=$jumlah_penyeberangan&total_harga=$total_harga&sisa_stok=$sisa_stok&jumlah_stok=$jumlah_stok"; ?>">Beli</a>
                           </td>
                         </tr>
                       </tbody>
-              <?php
-                $no++;
-                    }
-                  }
-                  echo "
+              <?php $no++;}
+                }
+                echo "
                   </table>
                   </div> ";
-                }
-              ?>
+              } ?>
             </div>
           </form>
         </div>

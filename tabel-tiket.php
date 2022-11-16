@@ -1,19 +1,18 @@
 <?php
-    session_start();
-  
-    //cek apakah user sudah login
-    if(!isset($_SESSION['username'])){
-      header("Location: login.php?pesan=Silahkan Login Terlebih Dahulu&alert=alert-warning");
-    }
-    
-    //cek level user
-    if($_SESSION['level']!="Admin")
-    {
-      header("Location: index.php");
-    }
+session_start();
 
-    ob_start();
-    include 'connect.php';
+//cek apakah user sudah login
+if (!isset($_SESSION['username'])) {
+  header('Location: login.php?pesan=Silahkan Login Terlebih Dahulu&alert=alert-warning');
+}
+
+//cek level user
+if ($_SESSION['level'] != 'Admin') {
+  header('Location: index.php');
+}
+
+ob_start();
+include 'connect.php';
 ?>
 
 <!DOCTYPE html>
@@ -190,14 +189,16 @@
 
                 <!-- User -->
                 <?php
-                  $nik=$_SESSION['nik'];
-                  $queryy=mysqli_query($connect,"SELECT * FROM tb_user WHERE `nik`='$nik'");
-                  $profile=mysqli_fetch_array($queryy);
+                $nik = $_SESSION['nik'];
+                $queryy = mysqli_query($connect, "SELECT * FROM tb_user WHERE `nik`='$nik'");
+                $profile = mysqli_fetch_array($queryy);
                 ?>
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="assets/img/profile/<?php echo $profile['gambar'];?>" alt class="w-px-40 h-auto rounded-circle" />
+                      <img src="assets/img/profile/<?php echo $profile[
+                        'gambar'
+                      ]; ?>" alt class="w-px-40 h-auto rounded-circle" />
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -206,11 +207,13 @@
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                              <img src="assets/img/profile/<?php echo $profile['gambar'];?>" alt class="w-px-40 h-auto rounded-circle" />
+                              <img src="assets/img/profile/<?php echo $profile[
+                                'gambar'
+                              ]; ?>" alt class="w-px-40 h-auto rounded-circle" />
                             </div>
                           </div>
                           <div class="flex-grow-1">
-                            <span class="fw-semibold d-block"><?php echo $profile['nama'];?></span>
+                            <span class="fw-semibold d-block"><?php echo $profile['nama']; ?></span>
                             <small class="text-muted">Admin</small>
                           </div>
                         </div>
@@ -252,17 +255,15 @@
 
               <!-- Basic Bootstrap Table -->
               <div class="card">
-              <?php 
-                if(isset($_GET['pesan'])){
-                  $pesan = $_GET['pesan'];
-                  $alert = $_GET['alert'];
-                  echo"
+              <?php if (isset($_GET['pesan'])) {
+                $pesan = $_GET['pesan'];
+                $alert = $_GET['alert'];
+                echo "
                   <div class='alert $alert alert-dismissible' role='alert'>
                   $pesan
                   <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                   </div>";
-                }
-              ?>
+              } ?>
                 <h5 class="card-header">Daftar Tiket</h5>
                 
                     <div class="col-lg-4 col-md-6 ">
@@ -293,13 +294,12 @@
                     </thead>
 
                   <?php
-                    $sqlget = "SELECT tb_tiket.id_tiket, tb_tiket.nama_tiket, tb_tiket.harga_tiket, tb_kapal.id_kapal, tb_kapal.nama_kapal
+                  $sqlget = "SELECT tb_tiket.id_tiket, tb_tiket.nama_tiket, tb_tiket.harga_tiket, tb_kapal.id_kapal, tb_kapal.nama_kapal
                               FROM tb_tiket INNER JOIN tb_kapal ON tb_tiket.id_kapal=tb_kapal.id_kapal";
-                    $query = mysqli_query($connect, $sqlget);
-                    $no=1;
+                  $query = mysqli_query($connect, $sqlget);
+                  $no = 1;
 
-                    while ($data = mysqli_fetch_row($query)){
-                  ?>
+                  while ($data = mysqli_fetch_row($query)) { ?>
                     <tbody class="table-border-bottom-0">
                       <tr>
                         <td scope="row"><?php echo $no; ?></td>
@@ -326,9 +326,10 @@
                         </td>
                       </tr>
                     </tbody>
-
-                      <!-- Modal Insert -->
-                      <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
+                  <?php $no++;}
+                  ?>
+                 <!-- Modal Insert -->
+                 <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                           <div class="modal-content">
                             <div class="modal-header">
@@ -343,26 +344,6 @@
                             <div class="modal-body">
                               <div class="row">
                               <form action="act-tiket.php?act=create" method="post" enctype="multipart/form-data">
-                                  <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label" for="id_tiket">ID Tiket</label>
-                                    <div class="col-sm-10">
-                                      <div class="input-group input-group-merge">
-                                        <span id="id_tiket2" class="input-group-text"
-                                          ><i class="bx bx-hash"></i
-                                        ></span>
-                                        <input
-                                          type="text"
-                                          class="form-control"
-                                          id="id_tiket"
-                                          name="id_tiket"
-                                          placeholder="Masukan ID Tiket"
-                                          aria-label="Masukan ID Tiket"
-                                          aria-describedby="id_tiket2"
-                                          required
-                                        />
-                                      </div>
-                                    </div>
-                                  </div>
                                   <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label" for="nama_tiket">Nama Tiket</label>
                                     <div class="col-sm-10">
@@ -393,12 +374,12 @@
                                         <select class="form-select" name="id_kapal" id="id_kapal">
                                           <option selected>Pilih Kapal</option>
                                           <?php
-                                            $querySelect = mysqli_query($connect, "SELECT * FROM tb_kapal");
-                                            while ($option = mysqli_fetch_row($querySelect)){
-                                            echo"
+                                          $querySelect = mysqli_query($connect, 'SELECT * FROM tb_kapal');
+                                          while ($option = mysqli_fetch_row($querySelect)) {
+                                            echo "
                                             <option value='$option[0]'>$option[1]</option>
                                             ";
-                                            }
+                                          }
                                           ?>
                                         </select>  
                                       </div>
@@ -461,25 +442,6 @@
                               <div class="row">
                               <form action="act-tiket.php?act=update&id_tiket=<?php echo $data[0]; ?>" method="post" enctype="multipart/form-data">
                                   <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label" for="id_tiket">ID Tiket</label>
-                                    <div class="col-sm-10">
-                                      <div class="input-group input-group-merge">
-                                        <span id="id_tiket2" class="input-group-text"
-                                          ><i class="bx bx-hash"></i
-                                        ></span>
-                                        <input
-                                          type="text"
-                                          class="form-control"
-                                          id="id_tiket"
-                                          name="id_tiket"
-                                          value="<?php echo $data[0];?>"
-                                          aria-describedby="id_tiket2"
-                                          required
-                                        />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label" for="nama_tiket">Nama Tiket</label>
                                     <div class="col-sm-10">
                                       <div class="input-group input-group-merge">
@@ -508,12 +470,12 @@
                                         <select class="form-select" name="id_kapal" id="id_kapal">
                                           <option selected value="<?php echo $data[3]; ?>"><?php echo $data[4]; ?></option>
                                           <?php
-                                            $querySelect = mysqli_query($connect, "SELECT * FROM tb_kapal");
-                                            while ($option = mysqli_fetch_row($querySelect)){
-                                            echo"
+                                          $querySelect = mysqli_query($connect, 'SELECT * FROM tb_kapal');
+                                          while ($option = mysqli_fetch_row($querySelect)) {
+                                            echo "
                                             <option value='$option[0]'>$option[1]</option>
                                             ";
-                                            }
+                                          }
                                           ?>
                                         </select>  
                                       </div>
@@ -557,11 +519,6 @@
                           </div>
                         </div>
                       <!-- Modal End -->
-                  <?php
-                    $no++;
-                  }
-                  ?>
-                 
                   </table>
                 </div>
               </div>

@@ -1,18 +1,17 @@
 <?php
-    session_start();
-  
-    //cek apakah user sudah login
-    if(!isset($_SESSION['username'])){
-      header("Location: login.php?pesan=Silahkan Login Terlebih Dahulu&alert=alert-warning");
-    }
-    
-    //cek level user
-    if($_SESSION['level']!="Admin")
-    {
-      header("Location: index.php");
-    }
-    ob_start();
-    include 'connect.php';
+session_start();
+
+//cek apakah user sudah login
+if (!isset($_SESSION['username'])) {
+  header('Location: login.php?pesan=Silahkan Login Terlebih Dahulu&alert=alert-warning');
+}
+
+//cek level user
+if ($_SESSION['level'] != 'Admin') {
+  header('Location: index.php');
+}
+ob_start();
+include 'connect.php';
 ?>
 
 <!DOCTYPE html>
@@ -190,14 +189,16 @@
 
                 <!-- User -->
                 <?php
-                  $nik=$_SESSION['nik'];
-                  $queryy=mysqli_query($connect,"SELECT * FROM tb_user WHERE `nik`='$nik'");
-                  $profile=mysqli_fetch_array($queryy);
+                $nik = $_SESSION['nik'];
+                $queryy = mysqli_query($connect, "SELECT * FROM tb_user WHERE `nik`='$nik'");
+                $profile = mysqli_fetch_array($queryy);
                 ?>
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="assets/img/profile/<?php echo $profile['gambar'];?>" alt class="w-px-40 h-auto rounded-circle" />
+                      <img src="assets/img/profile/<?php echo $profile[
+                        'gambar'
+                      ]; ?>" alt class="w-px-40 h-auto rounded-circle" />
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -206,11 +207,13 @@
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                              <img src="assets/img/profile/<?php echo $profile['gambar'];?>" alt class="w-px-40 h-auto rounded-circle" />
+                              <img src="assets/img/profile/<?php echo $profile[
+                                'gambar'
+                              ]; ?>" alt class="w-px-40 h-auto rounded-circle" />
                             </div>
                           </div>
                           <div class="flex-grow-1">
-                            <span class="fw-semibold d-block"><?php echo $profile['nama'];?></span>
+                            <span class="fw-semibold d-block"><?php echo $profile['nama']; ?></span>
                             <small class="text-muted">Admin</small>
                           </div>
                         </div>
@@ -252,17 +255,15 @@
 
               <!-- Basic Bootstrap Table -->
               <div class="card">
-              <?php 
-                if(isset($_GET['pesan'])){
-                  $pesan = $_GET['pesan'];
-                  $alert = $_GET['alert'];
-                  echo"
+              <?php if (isset($_GET['pesan'])) {
+                $pesan = $_GET['pesan'];
+                $alert = $_GET['alert'];
+                echo "
                   <div class='alert $alert alert-dismissible' role='alert'>
                   $pesan
                   <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                   </div>";
-                }
-              ?>
+              } ?>
                 <h5 class="card-header">Daftar Kapal</h5>
                 
                     <div class="col-lg-4 col-md-6 ">
@@ -287,25 +288,28 @@
                         <th>ID Kapal</th>
                         <th>Nama Kapal</th>
                         <th>Papalimbang</th>
+                        <th>Alamat Penyeberangan</th>
+                        <th>Kontak</th>
                         <th>Aksi</th>
                       </tr>
                     </thead>
 
                   <?php
-                    $sqlget = "SELECT tb_kapal.id_kapal, tb_kapal.nama_kapal, tb_papalimbang.nik_papalimbang, tb_papalimbang.nama_papalimbang 
+                  $sqlget = "SELECT tb_kapal.id_kapal, tb_kapal.nama_kapal, tb_papalimbang.nik_papalimbang, tb_papalimbang.nama_papalimbang, tb_kapal.alamat, tb_kapal.no_hp
                     FROM tb_kapal INNER JOIN tb_papalimbang 
                     ON tb_kapal.nik_papalimbang = tb_papalimbang.nik_papalimbang";
-                    $query = mysqli_query($connect, $sqlget);
-                    $no=1;
+                  $query = mysqli_query($connect, $sqlget);
+                  $no = 1;
 
-                    while ($data = mysqli_fetch_row($query)){
-                  ?>
+                  while ($data = mysqli_fetch_row($query)) { ?>
                     <tbody class="table-border-bottom-0">
                       <tr>
                         <td scope="row"><?php echo $no; ?></td>
                         <td><?php echo $data[0]; ?></td>
                         <td><?php echo $data[1]; ?></td>
                         <td><?php echo $data[3]; ?></td>
+                        <td><?php echo $data[4]; ?></td>
+                        <td><?php echo $data[5]; ?></td>
                         <td>
                           <div class="dropdown">
                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -325,9 +329,10 @@
                         </td>
                       </tr>
                     </tbody>
-
-                      <!-- Modal Insert -->
-                      <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
+                  <?php $no++;}
+                  ?>
+                 <!-- Modal Insert -->
+                 <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                           <div class="modal-content">
                             <div class="modal-header">
@@ -342,26 +347,6 @@
                             <div class="modal-body">
                               <div class="row">
                               <form action="act-kapal.php?act=create" method="post" enctype="multipart/form-data">
-                                  <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label" for="id_kapal">ID Kapal</label>
-                                    <div class="col-sm-10">
-                                      <div class="input-group input-group-merge">
-                                        <span id="id_kapal2" class="input-group-text"
-                                          ><i class="bx bx-hash"></i
-                                        ></span>
-                                        <input
-                                          type="text"
-                                          class="form-control"
-                                          id="id_kapal"
-                                          name="id_kapal"
-                                          placeholder="Masukan ID Kapal"
-                                          aria-label="Masukan ID Kapal"
-                                          aria-describedby="id_kapal2"
-                                          required
-                                        />
-                                      </div>
-                                    </div>
-                                  </div>
                                   <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label" for="nama_kapal">Nama</label>
                                     <div class="col-sm-10">
@@ -392,14 +377,34 @@
                                         <select class="form-select" name="nik_papalimbang" id="nik_papalimbang">
                                           <option selected>Pilih Papalimbang</option>
                                           <?php
-                                            $querySelect = mysqli_query($connect, "SELECT * FROM tb_papalimbang");
-                                            while ($option = mysqli_fetch_row($querySelect)){
-                                            echo"
+                                          $querySelect = mysqli_query($connect, 'SELECT * FROM tb_papalimbang');
+                                          while ($option = mysqli_fetch_row($querySelect)) {
+                                            echo "
                                             <option value='$option[0]'>$option[1]</option>
                                             ";
-                                            }
+                                          }
                                           ?>
                                         </select>  
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" for="alamat">Alamat Penyeberangan</label>
+                                    <div class="col-sm-10">
+                                      <div class="input-group input-group-merge">
+                                        <span id="alamat2" class="input-group-text"
+                                          ><i class="bx bx-user"></i
+                                        ></span>
+                                        <input
+                                          type="text"
+                                          class="form-control"
+                                          id="alamat"
+                                          name="alamat"
+                                          placeholder="Masukan Alamat Penyeberangan"
+                                          aria-label="Masukan Alamat Penyeberangan"
+                                          aria-describedby="alamat2"
+                                          required
+                                        />
                                       </div>
                                     </div>
                                   </div>
@@ -440,25 +445,6 @@
                               <div class="row">
                               <form action="act-kapal.php?act=update&id_kapal=<?php echo $data[0]; ?>" method="post" enctype="multipart/form-data">
                                   <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label" for="id_kapal">ID Kapal</label>
-                                    <div class="col-sm-10">
-                                      <div class="input-group input-group-merge">
-                                        <span id="id_kapal2" class="input-group-text"
-                                          ><i class="bx bx-hash"></i
-                                        ></span>
-                                        <input
-                                          type="text"
-                                          class="form-control"
-                                          id="id_kapal"
-                                          name="id_kapal"
-                                          value="<?php echo $data[0];?>"
-                                          aria-describedby="id_kapal2"
-                                          required
-                                        />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label" for="nama_kapal">Nama Kapal</label>
                                     <div class="col-sm-10">
                                       <div class="input-group input-group-merge">
@@ -487,14 +473,33 @@
                                         <select class="form-select" name="nik_papalimbang" id="nik_papalimbang">
                                           <option selected value="<?php echo $data[2]; ?>"><?php echo $data[3]; ?></option>
                                           <?php
-                                            $querySelect = mysqli_query($connect, "SELECT * FROM tb_papalimbang");
-                                            while ($option = mysqli_fetch_row($querySelect)){
-                                            echo"
+                                          $querySelect = mysqli_query($connect, 'SELECT * FROM tb_papalimbang');
+                                          while ($option = mysqli_fetch_row($querySelect)) {
+                                            echo "
                                             <option value='$option[0]'>$option[1]</option>
                                             ";
-                                            }
+                                          }
                                           ?>
                                         </select>  
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" for="alamat">Alamat Penyeberangan</label>
+                                    <div class="col-sm-10">
+                                      <div class="input-group input-group-merge">
+                                        <span id="alamat2" class="input-group-text"
+                                          ><i class="bx bx-user"></i
+                                        ></span>
+                                        <input
+                                          type="text"
+                                          class="form-control"
+                                          id="alamat"
+                                          name="alamat"
+                                          value="<?php echo $data[4]; ?>"
+                                          aria-describedby="alamat2"
+                                          required
+                                        />
                                       </div>
                                     </div>
                                   </div>
@@ -517,11 +522,6 @@
                           </div>
                         </div>
                       <!-- Modal End -->
-                  <?php
-                    $no++;
-                  }
-                  ?>
-                 
                   </table>
                 </div>
               </div>

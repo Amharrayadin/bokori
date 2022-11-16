@@ -1,15 +1,14 @@
 <?php
-    session_start();
-  
-    //cek apakah user sudah login
-    if(!isset($_SESSION['username'])){
-      header("Location: login.php?pesan=Silahkan Login Terlebih Dahulu&alert=alert-warning");
-    }else if($_SESSION['level']!="Admin")
-    {
-      header("Location: index.php");
-    }
-    ob_start();
-    include 'connect.php';
+session_start();
+
+//cek apakah user sudah login
+if (!isset($_SESSION['username'])) {
+  header('Location: login.php?pesan=Silahkan Login Terlebih Dahulu&alert=alert-warning');
+} elseif ($_SESSION['level'] != 'Admin') {
+  header('Location: index.php');
+}
+ob_start();
+include 'connect.php';
 ?>
 
 <!DOCTYPE html>
@@ -187,14 +186,16 @@
 
                 <!-- User -->
                 <?php
-                  $nik=$_SESSION['nik'];
-                  $queryy=mysqli_query($connect,"SELECT * FROM tb_user WHERE `nik`='$nik'");
-                  $profile=mysqli_fetch_array($queryy);
+                $nik = $_SESSION['nik'];
+                $queryy = mysqli_query($connect, "SELECT * FROM tb_user WHERE `nik`='$nik'");
+                $profile = mysqli_fetch_array($queryy);
                 ?>
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="assets/img/profile/<?php echo $profile['gambar'];?>" alt class="w-px-40 h-auto rounded-circle" />
+                      <img src="assets/img/profile/<?php echo $profile[
+                        'gambar'
+                      ]; ?>" alt class="w-px-40 h-auto rounded-circle" />
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -203,11 +204,13 @@
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                              <img src="assets/img/profile/<?php echo $profile['gambar'];?>" alt class="w-px-40 h-auto rounded-circle" />
+                              <img src="assets/img/profile/<?php echo $profile[
+                                'gambar'
+                              ]; ?>" alt class="w-px-40 h-auto rounded-circle" />
                             </div>
                           </div>
                           <div class="flex-grow-1">
-                            <span class="fw-semibold d-block"><?php echo $profile['nama'];?></span>
+                            <span class="fw-semibold d-block"><?php echo $profile['nama']; ?></span>
                             <small class="text-muted">Admin</small>
                           </div>
                         </div>
@@ -249,16 +252,14 @@
 
               <!-- Basic Bootstrap Table -->
               <div class="card">
-              <?php 
-                if(isset($_GET['pesan'])){
-                  $pesan = $_GET['pesan'];
-                  echo"
+              <?php if (isset($_GET['pesan'])) {
+                $pesan = $_GET['pesan'];
+                echo "
                   <div class='alert alert-success alert-dismissible' role='alert'>
                   $pesan
                   <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                   </div>";
-                }
-              ?>
+              } ?>
                 <h5 class="card-header">Daftar Papalimbang</h5>
                 
                     <div class="col-lg-4 col-md-6 ">
@@ -289,12 +290,11 @@
                     </thead>
 
                   <?php
-                    $sqlget = "SELECT * FROM tb_papalimbang";
-                    $query = mysqli_query($connect, $sqlget);
-                    $no=1;
+                  $sqlget = 'SELECT * FROM tb_papalimbang';
+                  $query = mysqli_query($connect, $sqlget);
+                  $no = 1;
 
-                    while ($data = mysqli_fetch_row($query)){
-                  ?>
+                  while ($data = mysqli_fetch_row($query)) { ?>
                     <tbody class="table-border-bottom-0">
                       <tr>
                         <td scope="row"><?php echo $no; ?></td>
@@ -321,9 +321,10 @@
                         </td>
                       </tr>
                     </tbody>
-
-                      <!-- Modal Insert -->
-                      <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
+                  <?php $no++;}
+                  ?>
+                  <!-- Modal Insert -->
+                  <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                           <div class="modal-content">
                             <div class="modal-header">
@@ -337,7 +338,7 @@
                             </div>
                             <div class="modal-body">
                               <div class="row">
-                              <form action="act-papalimbang.php?act=create" method="post" enctype="multipart/form-data">
+                                <form action="act-papalimbang.php?act=create" method="post" enctype="multipart/form-data">
                                   <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label" for="nik_papalimbang">NIK</label>
                                     <div class="col-sm-10">
@@ -430,7 +431,6 @@
                                     </div>
                                   </div>
                                 </form>
-
                               </div>
                             </div>
 
@@ -466,7 +466,7 @@
                                           class="form-control"
                                           id="nik_papalimbang"
                                           name="nik_papalimbang"
-                                          value="<?php echo $data[0];?>"
+                                          value="<?php echo $data[0]; ?>"
                                           aria-describedby="nik_papalimbang2"
                                           required
                                         />
@@ -549,10 +549,6 @@
                           </div>
                         </div>
                       <!-- Modal End -->
-                  <?php
-                    $no++;
-                  }
-                  ?>
                  
                   </table>
                 </div>

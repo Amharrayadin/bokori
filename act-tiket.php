@@ -56,7 +56,7 @@
     if($_GET['act']=='create-stok'){
         $id_tiket = $_POST['id_tiket'];
         $tgl_stok = $_POST['tgl_stok'];
-        $jam_stok = $_POST['harga_tiket'];
+        $jam_stok = $_POST['jam_stok'];
         $jumlah_stok = $_POST['jumlah_stok'];
         
         $sqlinsert = "INSERT INTO `tb_stok_tiket` (`id_tiket`, `tgl_stok`, `jam_stok`,`jumlah_stok`) 
