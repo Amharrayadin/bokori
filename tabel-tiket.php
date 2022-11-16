@@ -326,6 +326,100 @@ include 'connect.php';
                         </td>
                       </tr>
                     </tbody>
+                        <!-- Modal Edit-->
+                        <div class="modal fade" id="modalCenter<?php echo $data[0]; ?>" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="modalCenterTitle">Edit Data Papalimbang</h5>
+                              <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                              ></button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="row">
+                              <form action="act-tiket.php?act=update&id_tiket=<?php echo $data[0]; ?>" method="post" enctype="multipart/form-data">
+                                  <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" for="nama_tiket">Nama Tiket</label>
+                                    <div class="col-sm-10">
+                                      <div class="input-group input-group-merge">
+                                        <span id="nama_tiket2" class="input-group-text"
+                                          ><i class="bx bx-user"></i
+                                        ></span>
+                                        <input
+                                          type="text"
+                                          class="form-control"
+                                          id="nama_tiket"
+                                          name="nama_tiket"
+                                          value="<?php echo $data[1]; ?>"
+                                          aria-describedby="nama_tiket2"
+                                          required
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" for="id_kapal">Kapal</label>
+                                    <div class="col-sm-10">
+                                      <div class="input-group input-group-merge">
+                                        <span id="id_kapal2" class="input-group-text"
+                                          ><i class="bx bx-home"></i
+                                        ></span>
+                                        <select class="form-select" name="id_kapal" id="id_kapal">
+                                          <option selected value="<?php echo $data[3]; ?>"><?php echo $data[4]; ?></option>
+                                          <?php
+                                          $querySelect = mysqli_query($connect, 'SELECT * FROM tb_kapal');
+                                          while ($option = mysqli_fetch_row($querySelect)) {
+                                            echo "
+                                            <option value='$option[0]'>$option[1]</option>
+                                            ";
+                                          }
+                                          ?>
+                                        </select>  
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" for="harga_tiket">Harga Tiket</label>
+                                    <div class="col-sm-10">
+                                      <div class="input-group input-group-merge">
+                                        <span id="harga_tiket2" class="input-group-text"
+                                          ><i class="bx bx-dollar"></i
+                                        ></span>
+                                        <input
+                                          type="text"
+                                          class="form-control"
+                                          id="harga_tiket"
+                                          name="harga_tiket"
+                                          value="<?php echo $data[2]; ?>"
+                                          aria-describedby="harga_tiket2"
+                                          required
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row justify-content-end">
+                                    <div class="col-sm-10">
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                          Batal
+                                        </button>
+                                        <input type="submit" class="btn btn-primary" name="edit" value="Edit"></input>
+                                      </div>
+                                    </div>
+                                    </div>
+                                  </div>
+                                </form>
+
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      <!-- Modal End -->
                   <?php $no++;}
                   ?>
                  <!-- Modal Insert -->
@@ -425,100 +519,7 @@ include 'connect.php';
                         </div>
                       <!-- Modal Insert -->
 
-                      <!-- Modal Edit-->
-                      <div class="modal fade" id="modalCenter<?php echo $data[0]; ?>" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="modalCenterTitle">Edit Data Papalimbang</h5>
-                              <button
-                                type="button"
-                                class="btn-close"
-                                data-bs-dismiss="modal"
-                                aria-label="Close"
-                              ></button>
-                            </div>
-                            <div class="modal-body">
-                              <div class="row">
-                              <form action="act-tiket.php?act=update&id_tiket=<?php echo $data[0]; ?>" method="post" enctype="multipart/form-data">
-                                  <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label" for="nama_tiket">Nama Tiket</label>
-                                    <div class="col-sm-10">
-                                      <div class="input-group input-group-merge">
-                                        <span id="nama_tiket2" class="input-group-text"
-                                          ><i class="bx bx-user"></i
-                                        ></span>
-                                        <input
-                                          type="text"
-                                          class="form-control"
-                                          id="nama_tiket"
-                                          name="nama_tiket"
-                                          value="<?php echo $data[1]; ?>"
-                                          aria-describedby="nama_tiket2"
-                                          required
-                                        />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label" for="id_kapal">Kapal</label>
-                                    <div class="col-sm-10">
-                                      <div class="input-group input-group-merge">
-                                        <span id="id_kapal2" class="input-group-text"
-                                          ><i class="bx bx-home"></i
-                                        ></span>
-                                        <select class="form-select" name="id_kapal" id="id_kapal">
-                                          <option selected value="<?php echo $data[3]; ?>"><?php echo $data[4]; ?></option>
-                                          <?php
-                                          $querySelect = mysqli_query($connect, 'SELECT * FROM tb_kapal');
-                                          while ($option = mysqli_fetch_row($querySelect)) {
-                                            echo "
-                                            <option value='$option[0]'>$option[1]</option>
-                                            ";
-                                          }
-                                          ?>
-                                        </select>  
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label" for="harga_tiket">Harga Tiket</label>
-                                    <div class="col-sm-10">
-                                      <div class="input-group input-group-merge">
-                                        <span id="harga_tiket2" class="input-group-text"
-                                          ><i class="bx bx-dollar"></i
-                                        ></span>
-                                        <input
-                                          type="text"
-                                          class="form-control"
-                                          id="harga_tiket"
-                                          name="harga_tiket"
-                                          value="<?php echo $data[2]; ?>"
-                                          aria-describedby="harga_tiket2"
-                                          required
-                                        />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="row justify-content-end">
-                                    <div class="col-sm-10">
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                                          Batal
-                                        </button>
-                                        <input type="submit" class="btn btn-primary" name="edit" value="Edit"></input>
-                                      </div>
-                                    </div>
-                                    </div>
-                                  </div>
-                                </form>
-
-                              </div>
-                            </div>
-
-                          </div>
-                        </div>
-                      <!-- Modal End -->
+                  
                   </table>
                 </div>
               </div>

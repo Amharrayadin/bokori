@@ -78,7 +78,7 @@ https://templatemo.com/tm-580-woox-travel
 <body>
 
   <!-- ***** Preloader Start ***** -->
-  <!-- <div id="js-preloader" class="js-preloader">
+  <div id="js-preloader" class="js-preloader">
     <div class="preloader-inner">
       <span class="dot"></span>
       <div class="dots">
@@ -87,7 +87,7 @@ https://templatemo.com/tm-580-woox-travel
         <span></span>
       </div>
     </div>
-  </div> -->
+  </div>
   <!-- ***** Preloader End ***** -->
 
   <!-- ***** Header Area Start ***** -->
@@ -136,13 +136,6 @@ https://templatemo.com/tm-580-woox-travel
         <div class="col-lg-12">
           <form id="reservation-form" name="gs" method="post" action="">
             <div class="row">
-              <div class="col col-md-2">
-                  <a href="pesan-tiket.php" class="">
-                  
-                    Kembali
-                 
-                </a>
-              </div>
               <div class="col-lg-12">
                 <h4> <em>Tiket Penyebrangan</em> Bokori Island </h4>
               </div>

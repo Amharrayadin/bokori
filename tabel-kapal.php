@@ -329,6 +329,120 @@ include 'connect.php';
                         </td>
                       </tr>
                     </tbody>
+                                          <!-- Modal Edit-->
+                                          <div class="modal fade" id="modalCenter<?php echo $data[0]; ?>" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="modalCenterTitle">Edit Data Papalimbang</h5>
+                              <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                              ></button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="row">
+                              <form action="act-kapal.php?act=update&id_kapal=<?php echo $data[0]; ?>" method="post" enctype="multipart/form-data">
+                                  <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" for="nama_kapal">Nama Kapal</label>
+                                    <div class="col-sm-10">
+                                      <div class="input-group input-group-merge">
+                                        <span id="nama_kapal2" class="input-group-text"
+                                          ><i class="bx bx-user"></i
+                                        ></span>
+                                        <input
+                                          type="text"
+                                          class="form-control"
+                                          id="nama_kapal"
+                                          name="nama_kapal"
+                                          value="<?php echo $data[1]; ?>"
+                                          aria-describedby="nama_kapal2"
+                                          required
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" for="nik_papalimbang">Papalimbang</label>
+                                    <div class="col-sm-10">
+                                      <div class="input-group input-group-merge">
+                                        <span id="nik_papalimbang2" class="input-group-text"
+                                          ><i class="bx bx-home"></i
+                                        ></span>
+                                        <select class="form-select" name="nik_papalimbang" id="nik_papalimbang">
+                                          <option selected value="<?php echo $data[2]; ?>"><?php echo $data[3]; ?></option>
+                                          <?php
+                                          $querySelect = mysqli_query($connect, 'SELECT * FROM tb_papalimbang');
+                                          while ($option = mysqli_fetch_row($querySelect)) {
+                                            echo "
+                                            <option value='$option[0]'>$option[1]</option>
+                                            ";
+                                          }
+                                          ?>
+                                        </select>  
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" for="alamat">Alamat Penyeberangan</label>
+                                    <div class="col-sm-10">
+                                      <div class="input-group input-group-merge">
+                                        <span id="alamat2" class="input-group-text"
+                                          ><i class="bx bx-user"></i
+                                        ></span>
+                                        <input
+                                          type="text"
+                                          class="form-control"
+                                          id="alamat"
+                                          name="alamat"
+                                          value="<?php echo $data[4]; ?>"
+                                          aria-describedby="alamat2"
+                                          required
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" for="no_hp">Alamat Penyeberangan</label>
+                                    <div class="col-sm-10">
+                                      <div class="input-group input-group-merge">
+                                        <span id="no_hp2" class="input-group-text"
+                                          ><i class="bx bx-user"></i
+                                        ></span>
+                                        <input
+                                          type="text"
+                                          class="form-control"
+                                          id="no_hp"
+                                          name="no_hp"
+                                          value="<?php echo $data[5]; ?>"
+                                          aria-describedby="no_hp2"
+                                          required
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
+                                  
+                                  <div class="row justify-content-end">
+                                    <div class="col-sm-10">
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                          Batal
+                                        </button>
+                                        <input type="submit" class="btn btn-primary" name="edit" value="Edit"></input>
+                                      </div>
+                                    </div>
+                                    </div>
+                                  </div>
+                                </form>
+
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      <!-- Modal End -->
                   <?php $no++;}
                   ?>
                  <!-- Modal Insert -->
@@ -428,100 +542,7 @@ include 'connect.php';
                         </div>
                       <!-- Modal Insert -->
 
-                      <!-- Modal Edit-->
-                      <div class="modal fade" id="modalCenter<?php echo $data[0]; ?>" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="modalCenterTitle">Edit Data Papalimbang</h5>
-                              <button
-                                type="button"
-                                class="btn-close"
-                                data-bs-dismiss="modal"
-                                aria-label="Close"
-                              ></button>
-                            </div>
-                            <div class="modal-body">
-                              <div class="row">
-                              <form action="act-kapal.php?act=update&id_kapal=<?php echo $data[0]; ?>" method="post" enctype="multipart/form-data">
-                                  <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label" for="nama_kapal">Nama Kapal</label>
-                                    <div class="col-sm-10">
-                                      <div class="input-group input-group-merge">
-                                        <span id="nama_kapal2" class="input-group-text"
-                                          ><i class="bx bx-user"></i
-                                        ></span>
-                                        <input
-                                          type="text"
-                                          class="form-control"
-                                          id="nama_kapal"
-                                          name="nama_kapal"
-                                          value="<?php echo $data[1]; ?>"
-                                          aria-describedby="nama_kapal2"
-                                          required
-                                        />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label" for="nik_papalimbang">Papalimbang</label>
-                                    <div class="col-sm-10">
-                                      <div class="input-group input-group-merge">
-                                        <span id="nik_papalimbang2" class="input-group-text"
-                                          ><i class="bx bx-home"></i
-                                        ></span>
-                                        <select class="form-select" name="nik_papalimbang" id="nik_papalimbang">
-                                          <option selected value="<?php echo $data[2]; ?>"><?php echo $data[3]; ?></option>
-                                          <?php
-                                          $querySelect = mysqli_query($connect, 'SELECT * FROM tb_papalimbang');
-                                          while ($option = mysqli_fetch_row($querySelect)) {
-                                            echo "
-                                            <option value='$option[0]'>$option[1]</option>
-                                            ";
-                                          }
-                                          ?>
-                                        </select>  
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label" for="alamat">Alamat Penyeberangan</label>
-                                    <div class="col-sm-10">
-                                      <div class="input-group input-group-merge">
-                                        <span id="alamat2" class="input-group-text"
-                                          ><i class="bx bx-user"></i
-                                        ></span>
-                                        <input
-                                          type="text"
-                                          class="form-control"
-                                          id="alamat"
-                                          name="alamat"
-                                          value="<?php echo $data[4]; ?>"
-                                          aria-describedby="alamat2"
-                                          required
-                                        />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="row justify-content-end">
-                                    <div class="col-sm-10">
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                                          Batal
-                                        </button>
-                                        <input type="submit" class="btn btn-primary" name="edit" value="Edit"></input>
-                                      </div>
-                                    </div>
-                                    </div>
-                                  </div>
-                                </form>
 
-                              </div>
-                            </div>
-
-                          </div>
-                        </div>
-                      <!-- Modal End -->
                   </table>
                 </div>
               </div>

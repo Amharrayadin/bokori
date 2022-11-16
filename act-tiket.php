@@ -2,13 +2,12 @@
     include 'connect.php';
 
     if($_GET['act']=='create'){
-        $id_tiket = $_POST['id_tiket'];
         $nama_tiket = $_POST['nama_tiket'];
         $id_kapal = $_POST['id_kapal'];
         $harga_tiket = $_POST['harga_tiket'];
         
-        $sqlinsert = "INSERT INTO `tb_tiket` (`id_tiket`, `nama_tiket`, `harga_tiket`,`id_kapal`) 
-        VALUES ('$id_tiket', '$nama_tiket', '$harga_tiket','$id_kapal');";
+        $sqlinsert = "INSERT INTO `tb_tiket` ( `nama_tiket`, `harga_tiket`,`id_kapal`) 
+        VALUES ( '$nama_tiket', '$harga_tiket','$id_kapal');";
         $query = mysqli_query($connect, $sqlinsert);
         
         
@@ -32,8 +31,7 @@
     }
                         
     if($_GET['act']=='update'){
-        $id_tiketdefault = $_GET['id_tiket'];
-        $id_tiket = $_POST['id_tiket'];
+        $id_tiket = $_GET['id_tiket'];
         $nama_tiket = $_POST['nama_tiket'];
         $harga_tiket = $_POST['harga_tiket'];
         $id_kapal = $_POST['id_kapal'];
@@ -43,7 +41,7 @@
                      `nama_tiket` = '$nama_tiket', 
                      `harga_tiket` = '$harga_tiket',
                      `id_kapal` = '$id_kapal' 
-                     WHERE `tb_tiket`.`id_tiket` = $id_tiketdefault";
+                     WHERE `tb_tiket`.`id_tiket` = $id_tiket";
         $query = mysqli_query($connect, $sqlupdate);
         
         if($query){

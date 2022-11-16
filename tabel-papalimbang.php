@@ -321,6 +321,117 @@ include 'connect.php';
                         </td>
                       </tr>
                     </tbody>
+                    <!-- Modal Edit-->
+                    <div class="modal fade" id="modalCenter<?php echo $data[0]; ?>" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="modalCenterTitle">Edit Data Papalimbang</h5>
+                              <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                              ></button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="row">
+                              <form action="act-papalimbang.php?act=update&nik_papalimbang=<?php echo $data[0]; ?>" method="post" enctype="multipart/form-data">
+                                  <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" for="nik_papalimbang">NIK</label>
+                                    <div class="col-sm-10">
+                                      <div class="input-group input-group-merge">
+                                        <span id="nik_papalimbang2" class="input-group-text"
+                                          ><i class="bx bx-hash"></i
+                                        ></span>
+                                        <input
+                                          type="text"
+                                          class="form-control"
+                                          id="nik_papalimbang"
+                                          name="nik_papalimbang"
+                                          value="<?php echo $data[0]; ?>"
+                                          aria-describedby="nik_papalimbang2"
+                                          required
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" for="nama_papalimbang">Nama</label>
+                                    <div class="col-sm-10">
+                                      <div class="input-group input-group-merge">
+                                        <span id="nama_papalimbang2" class="input-group-text"
+                                          ><i class="bx bx-user"></i
+                                        ></span>
+                                        <input
+                                          type="text"
+                                          class="form-control"
+                                          id="nama_papalimbang"
+                                          name="nama_papalimbang"
+                                          value="<?php echo $data[1]; ?>"
+                                          aria-describedby="nama_papalimbang2"
+                                          required
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" for="alamat_papalimbang">Alamat</label>
+                                    <div class="col-sm-10">
+                                      <div class="input-group input-group-merge">
+                                        <span id="alamat_papalimbang2" class="input-group-text"
+                                          ><i class="bx bx-home"></i
+                                        ></span>
+                                        <input
+                                          type="text"
+                                          id="alamat_papalimbang"
+                                          name="alamat_papalimbang"
+                                          class="form-control"
+                                          value="<?php echo $data[2]; ?>"
+                                          aria-describedby="alamat_papalimbang2"
+                                          required
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row mb-3">
+                                    <label class="col-sm-2 form-label" for="nohp_papalimbang">No Telepon</label>
+                                    <div class="col-sm-10">
+                                      <div class="input-group input-group-merge">
+                                        <span id="nohp_papalimbang2" class="input-group-text"
+                                          ><i class="bx bx-phone"></i
+                                        ></span>
+                                        <input
+                                          type="text"
+                                          id="nohp_papalimbang"
+                                          name="nohp_papalimbang"
+                                          class="form-control phone-mask"
+                                          value="<?php echo $data[3]; ?>"
+                                          aria-describedby="nohp_papalimbang2"
+                                          required
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row justify-content-end">
+                                    <div class="col-sm-10">
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                          Batal
+                                        </button>
+                                        <input type="submit" class="btn btn-primary" name="edit" value="Edit"></input>
+                                      </div>
+                                    </div>
+                                    </div>
+                                  </div>
+                                </form>
+
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      <!-- Modal End -->
                   <?php $no++;}
                   ?>
                   <!-- Modal Insert -->
@@ -438,117 +549,7 @@ include 'connect.php';
                         </div>
                       <!-- Modal Insert -->
 
-                      <!-- Modal Edit-->
-                      <div class="modal fade" id="modalCenter<?php echo $data[0]; ?>" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="modalCenterTitle">Edit Data Papalimbang</h5>
-                              <button
-                                type="button"
-                                class="btn-close"
-                                data-bs-dismiss="modal"
-                                aria-label="Close"
-                              ></button>
-                            </div>
-                            <div class="modal-body">
-                              <div class="row">
-                              <form action="act-papalimbang.php?act=update&nik_papalimbang=<?php echo $data[0]; ?>" method="post" enctype="multipart/form-data">
-                                  <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label" for="nik_papalimbang">NIK</label>
-                                    <div class="col-sm-10">
-                                      <div class="input-group input-group-merge">
-                                        <span id="nik_papalimbang2" class="input-group-text"
-                                          ><i class="bx bx-hash"></i
-                                        ></span>
-                                        <input
-                                          type="text"
-                                          class="form-control"
-                                          id="nik_papalimbang"
-                                          name="nik_papalimbang"
-                                          value="<?php echo $data[0]; ?>"
-                                          aria-describedby="nik_papalimbang2"
-                                          required
-                                        />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label" for="nama_papalimbang">Nama</label>
-                                    <div class="col-sm-10">
-                                      <div class="input-group input-group-merge">
-                                        <span id="nama_papalimbang2" class="input-group-text"
-                                          ><i class="bx bx-user"></i
-                                        ></span>
-                                        <input
-                                          type="text"
-                                          class="form-control"
-                                          id="nama_papalimbang"
-                                          name="nama_papalimbang"
-                                          value="<?php echo $data[1]; ?>"
-                                          aria-describedby="nama_papalimbang2"
-                                          required
-                                        />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label" for="alamat_papalimbang">Alamat</label>
-                                    <div class="col-sm-10">
-                                      <div class="input-group input-group-merge">
-                                        <span id="alamat_papalimbang2" class="input-group-text"
-                                          ><i class="bx bx-home"></i
-                                        ></span>
-                                        <input
-                                          type="text"
-                                          id="alamat_papalimbang"
-                                          name="alamat_papalimbang"
-                                          class="form-control"
-                                          value="<?php echo $data[2]; ?>"
-                                          aria-describedby="alamat_papalimbang2"
-                                          required
-                                        />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="row mb-3">
-                                    <label class="col-sm-2 form-label" for="nohp_papalimbang">No Telepon</label>
-                                    <div class="col-sm-10">
-                                      <div class="input-group input-group-merge">
-                                        <span id="nohp_papalimbang2" class="input-group-text"
-                                          ><i class="bx bx-phone"></i
-                                        ></span>
-                                        <input
-                                          type="text"
-                                          id="nohp_papalimbang"
-                                          name="nohp_papalimbang"
-                                          class="form-control phone-mask"
-                                          value="<?php echo $data[3]; ?>"
-                                          aria-describedby="nohp_papalimbang2"
-                                          required
-                                        />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="row justify-content-end">
-                                    <div class="col-sm-10">
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                                          Batal
-                                        </button>
-                                        <input type="submit" class="btn btn-primary" name="edit" value="Edit"></input>
-                                      </div>
-                                    </div>
-                                    </div>
-                                  </div>
-                                </form>
-
-                              </div>
-                            </div>
-
-                          </div>
-                        </div>
-                      <!-- Modal End -->
+                      
                  
                   </table>
                 </div>

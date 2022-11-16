@@ -327,7 +327,121 @@ include 'connect.php';
                         </td>
                       </tr>
                     </tbody>
+                     <!-- Modal Edit-->
+                     <div class="modal fade" id="modalCenter<?php echo $data[0]; ?>" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="modalCenterTitle">Edit Data Stok Tiket</h5>
+                              <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                              ></button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="row">
+                              <form action="act-tiket.php?act=edit-stok&id_stok=<?php echo $data[0]; ?>" method="post" enctype="multipart/form-data">
+                                  <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" for="id_tiket">Tiket</label>
+                                    <div class="col-sm-10">
+                                      <div class="input-group input-group-merge">
+                                        <span id="id_tiket2" class="input-group-text"
+                                          ><i class="bx bx-home"></i
+                                        ></span>
+                                        <select class="form-select" name="id_tiket" id="id_tiket">
+                                          <option value="<?php echo $data[1]; ?>" selected><?php echo "$data[1] - $data[2] - $data[4]"; ?></option>
+                                          <?php
+                                          $querySelect = mysqli_query(
+                                            $connect,
+                                            'SELECT tb_tiket.id_tiket, tb_tiket.nama_tiket, tb_kapal.nama_kapal FROM tb_tiket INNER JOIN tb_kapal ON tb_tiket.id_kapal = tb_kapal.id_kapal'
+                                          );
+                                          while ($option = mysqli_fetch_row($querySelect)) {
+                                            echo "
+                                            <option value='$option[0]'>$option[0] - $option[1] - $option[2]</option>
+                                            ";
+                                          }
+                                          ?>
+                                        </select>  
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" for="tgl_stok">Tanggal</label>
+                                    <div class="col-sm-10">
+                                      <div class="input-group input-group-merge">
+                                        <span id="tgl_stok2" class="input-group-text"
+                                          ><i class="bx bx-calendar"></i
+                                        ></span>
+                                        <input
+                                          type="date"
+                                          class="form-control"
+                                          id="tgl_stok"
+                                          name="tgl_stok"
+                                          value="<?php echo $data[5]; ?>"
+                                          aria-describedby="tgl_stok2"
+                                          required
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" for="jam_stok">Waktu</label>
+                                    <div class="col-sm-10">
+                                      <div class="input-group input-group-merge">
+                                        <span id="jam_stok2" class="input-group-text"
+                                          ><i class="bx bx-time"></i
+                                        ></span>
+                                        <input
+                                          type="time"
+                                          class="form-control"
+                                          id="jam_stok"
+                                          name="jam_stok"
+                                          value="<?php echo $data[6]; ?>"
+                                          aria-describedby="jam_stok2"
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" for="jumlah_stok">Jumlah Stok</label>
+                                    <div class="col-sm-10">
+                                      <div class="input-group input-group-merge">
+                                        <span id="jumlah_stok2" class="input-group-text"
+                                          ><i class="bx bx-hash"></i
+                                        ></span>
+                                        <input
+                                          type="text"
+                                          class="form-control"
+                                          id="jumlah_stok"
+                                          name="jumlah_stok"
+                                          value="<?php echo $data[7]; ?>"
+                                          aria-describedby="jumlah_stok2"
+                                          required
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row justify-content-end">
+                                    <div class="col-sm-10">
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                          Batal
+                                        </button>
+                                        <input type="submit" class="btn btn-primary" name="edit" value="Edit"></input>
+                                      </div>
+                                    </div>
+                                    </div>
+                                  </div>
+                                </form>
 
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      <!-- Modal End -->
                       
                   <?php $no++;}
                   ?>
@@ -406,7 +520,6 @@ include 'connect.php';
                                           placeholder="Masukan Waktu Tiket"
                                           aria-label="Masukan Waktu Tiket"
                                           aria-describedby="jam_stok2"
-                                          required
                                         />
                                       </div>
                                     </div>
@@ -451,122 +564,7 @@ include 'connect.php';
                         </div>
                       <!-- Modal Insert -->
 
-                      <!-- Modal Edit-->
-                      <div class="modal fade" id="modalCenter<?php echo $data[0]; ?>" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="modalCenterTitle">Edit Data Stok Tiket</h5>
-                              <button
-                                type="button"
-                                class="btn-close"
-                                data-bs-dismiss="modal"
-                                aria-label="Close"
-                              ></button>
-                            </div>
-                            <div class="modal-body">
-                              <div class="row">
-                              <form action="act-tiket.php?act=edit-stok&id_stok=<?php echo $data[0]; ?>" method="post" enctype="multipart/form-data">
-                                  <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label" for="id_tiket">Tiket</label>
-                                    <div class="col-sm-10">
-                                      <div class="input-group input-group-merge">
-                                        <span id="id_tiket2" class="input-group-text"
-                                          ><i class="bx bx-home"></i
-                                        ></span>
-                                        <select class="form-select" name="id_tiket" id="id_tiket">
-                                          <option value="<?php echo $data[1]; ?>" selected><?php echo "$data[1] - $data[2] - $data[4]"; ?></option>
-                                          <?php
-                                          $querySelect = mysqli_query(
-                                            $connect,
-                                            'SELECT tb_tiket.id_tiket, tb_tiket.nama_tiket, tb_kapal.nama_kapal FROM tb_tiket INNER JOIN tb_kapal ON tb_tiket.id_kapal = tb_kapal.id_kapal'
-                                          );
-                                          while ($option = mysqli_fetch_row($querySelect)) {
-                                            echo "
-                                            <option value='$option[0]'>$option[0] - $option[1] - $option[2]</option>
-                                            ";
-                                          }
-                                          ?>
-                                        </select>  
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label" for="tgl_stok">Tanggal</label>
-                                    <div class="col-sm-10">
-                                      <div class="input-group input-group-merge">
-                                        <span id="tgl_stok2" class="input-group-text"
-                                          ><i class="bx bx-calendar"></i
-                                        ></span>
-                                        <input
-                                          type="date"
-                                          class="form-control"
-                                          id="tgl_stok"
-                                          name="tgl_stok"
-                                          value="<?php echo $data[5]; ?>"
-                                          aria-describedby="tgl_stok2"
-                                          required
-                                        />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label" for="jam_stok">Waktu</label>
-                                    <div class="col-sm-10">
-                                      <div class="input-group input-group-merge">
-                                        <span id="jam_stok2" class="input-group-text"
-                                          ><i class="bx bx-time"></i
-                                        ></span>
-                                        <input
-                                          type="time"
-                                          class="form-control"
-                                          id="jam_stok"
-                                          name="jam_stok"
-                                          value="<?php echo $data[6]; ?>"
-                                          aria-describedby="jam_stok2"
-                                          required
-                                        />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label" for="jumlah_stok">Jumlah Stok</label>
-                                    <div class="col-sm-10">
-                                      <div class="input-group input-group-merge">
-                                        <span id="jumlah_stok2" class="input-group-text"
-                                          ><i class="bx bx-hash"></i
-                                        ></span>
-                                        <input
-                                          type="text"
-                                          class="form-control"
-                                          id="jumlah_stok"
-                                          name="jumlah_stok"
-                                          value="<?php echo $data[7]; ?>"
-                                          aria-describedby="jumlah_stok2"
-                                          required
-                                        />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="row justify-content-end">
-                                    <div class="col-sm-10">
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                                          Batal
-                                        </button>
-                                        <input type="submit" class="btn btn-primary" name="edit" value="Edit"></input>
-                                      </div>
-                                    </div>
-                                    </div>
-                                  </div>
-                                </form>
-
-                              </div>
-                            </div>
-
-                          </div>
-                        </div>
-                      <!-- Modal End -->
+ 
                   </table>
                 </div>
               </div>

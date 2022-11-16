@@ -35,18 +35,18 @@ if ($_GET['act'] == 'delete') {
 }
 
 if ($_GET['act'] == 'update') {
-  $id_kapaldefault = $_GET['id_kapal'];
+  $id_kapal = $_GET['id_kapal'];
   $nama_kapal = $_POST['nama_kapal'];
   $nik_papalimbang = $_POST['nik_papalimbang'];
   $alamat = $_POST['alamat'];
   $no_hp = $_POST['no_hp'];
 
-  $sqlupdate = "UPDATE `tb_kapal` SET 
+  $sqlupdate = "UPDATE `tb_kapal` SET
                      `nama_kapal` = '$nama_kapal', 
                      `nik_papalimbang` = '$nik_papalimbang',
                      `alamat` = '$alamat',
                      `no_hp` = '$no_hp' 
-                     WHERE `tb_kapal`.`id_kapal` = $id_kapaldefault";
+                     WHERE `tb_kapal`.`id_kapal` = '$id_kapal'";
   $query = mysqli_query($connect, $sqlupdate);
 
   if ($query) {

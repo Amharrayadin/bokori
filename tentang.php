@@ -188,8 +188,16 @@ https://templatemo.com/tm-580-woox-travel
       <div class="row">
         <div class="col-lg-6 offset-lg-3">
           <div class="section-heading text-center">
+            <?php
+            $sqljumlah = "SELECT * FROM tb_tiket" ;
+            $getjumlah = mysqli_query($connect,$sqljumlah);
+            $jumlah = mysqli_num_rows($getjumlah);
+            echo "
             <h2>Tiket Penyebrangan</h2>
-            <p>Terdapat 2 Jenis Pilihan Tiket: </p>
+            <p>Terdapat $jumlah Jenis Pilihan Tiket: </p>
+            ";
+             ?>
+            
           </div>
         </div>
       </div>
@@ -198,13 +206,20 @@ https://templatemo.com/tm-580-woox-travel
       <div class="row">
         <div class="col-lg-12">
           <div class="owl-weekly-offers owl-carousel">
+            <?php
+              $sqlget = "SELECT tb_tiket.id_tiket, tb_tiket.nama_tiket, tb_tiket.harga_tiket, tb_kapal.id_kapal, tb_kapal.nama_kapal
+              FROM tb_tiket INNER JOIN tb_kapal ON tb_tiket.id_kapal=tb_kapal.id_kapal";
+              $query = mysqli_query($connect, $sqlget);
+              $no = 1;
+
+             while ($data = mysqli_fetch_row($query)) { ?>
             <div class="item">
               <div class="thumb">
                 <img src="assets/images/b_1.jpg" alt="">
                 <div class="text">
                   <ul>
-                    <h2>Tiket Anak<br></h2><i class="fa fa-users"></i>  Anak Usia Dibawah 12 Tahun
-                    <br><h6><span>Rp 11.000/Orang</span><h6>
+                    <h2><?php echo $data[1]; ?><br></h2><i class="fa fa-users"></i>  <?php echo $data[4]; ?>
+                    <br><h6><span>Rp <?php echo $data[2]; ?>/Orang</span><h6>
                   </ul>
                   <div class="main-button">
                     <a href="pesan-tiket.">Buat Pesanan</a>
@@ -212,21 +227,9 @@ https://templatemo.com/tm-580-woox-travel
                 </div>
               </div>
             </div>
-            <div class="item">
-              <div class="thumb">
-                <img src="assets/images/b_2.jpg" alt="">
-                <div class="text">
-                  <!-- <div class="line-dec"></div> -->
-                  <ul>
-                  <h2>Tiket Dewasa<br></h2><i class="fa fa-users"></i>  Usia Diatas 12 Tahun
-                    <br><h6><span>Rp 21.000/Orang</span><h6>
-                  </ul>
-                  <div class="main-button">
-                    <a href="reservation.html">Buat Pesanan</a>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <?php
+  }
+            ?>            
           </div>
         </div>
       </div>
